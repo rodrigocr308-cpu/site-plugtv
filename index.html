@@ -3,96 +3,284 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PlugTV | Oficial</title>
+    <title>PlugTV | Séries, Filmes e Canais</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { 
-            /* Fundo com os posters de filmes que você escolheu */
-            background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.9)), 
-                        url('https://i.ibb.co/680L06Y/IMG-0438.jpg'); 
+            background: linear-gradient(rgba(15, 23, 42, 0.92), rgba(15, 23, 42, 0.92)), 
+                        url('fundo.jpg'); 
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             font-family: 'Montserrat', sans-serif; 
             color: white;
+            overflow-x: hidden;
         }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-200px * 5)); }
+        }
+
+        .slider-container {
+            overflow: hidden;
+            padding: 30px 0;
+            background: rgba(0, 0, 0, 0.3);
+            margin: 20px 0;
+            border-top: 1px solid rgba(168, 85, 247, 0.2);
+            border-bottom: 1px solid rgba(168, 85, 247, 0.2);
+        }
+
+        .slider-track {
+            display: flex;
+            width: calc(200px * 10);
+            animation: scroll 20s linear infinite;
+        }
+
+        .slide {
+            width: 180px;
+            height: 250px;
+            margin: 0 10px;
+            flex-shrink: 0;
+            border-radius: 1rem;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(168, 85, 247, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .slide img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 0.5rem;
+        }
+
         .plan-card, .faq-item {
-            background-color: rgba(91, 33, 182, 0.5); 
+            background-color: rgba(91, 33, 182, 0.4); 
             backdrop-filter: blur(12px);
-            border: 2px solid white;
+            border: 2px solid rgba(255, 255, 255, 0.1);
             border-radius: 1.5rem;
+            transition: all 0.3s ease;
         }
+        .plan-card:hover {
+            border-color: #a855f7;
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px rgba(168, 85, 247, 0.4);
+        }
+        
+        /* BÔNUS: Efeito de Brilho nos Botões de Plano */
+        .plan-card a {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .plan-card a::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to bottom right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 100%);
+            transform: rotate(45deg);
+            transition: all 0.5s;
+            opacity: 0;
+        }
+        
+        .plan-card:hover a::after {
+            opacity: 1;
+            top: -100%;
+            left: -100%;
+        }
+
+        @keyframes pulse-whatsapp {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+        .pulse-btn { animation: pulse-whatsapp 2s infinite; }
     </style>
 </head>
 <body class="antialiased">
 
     <nav class="flex flex-col items-center gap-4 p-8 max-w-6xl mx-auto">
-        <img src="https://i.ibb.co/C9H8Ntf/IMG-0440.jpg" alt="PlugTV Logo" class="h-32 w-auto rounded-2xl shadow-2xl border-2 border-purple-500/30">
-        <a href="https://wa.me/351930921305" target="_blank" class="bg-[#25D366] hover:bg-green-600 px-6 py-2 rounded-full font-bold text-sm flex items-center gap-2 transition shadow-lg text-white">
-            WhatsApp Suporte
+        <img src="logo.png" alt="PlugTV Logo" class="h-32 w-auto rounded-2xl shadow-2xl border-2 border-purple-500/30">
+        <a href="https://wa.me/351930921305?text=Olá! Preciso de suporte técnico." target="_blank" class="bg-[#25D366] hover:bg-green-600 px-6 py-2 rounded-full font-bold text-sm flex items-center gap-2 transition shadow-lg text-white">
+            WhatsApp Suporte Online
         </a>
     </nav>
 
     <header class="py-10 px-6 text-center">
         <h1 class="text-4xl md:text-6xl font-black mb-6 leading-tight uppercase">
-            Experimente a <span class="text-purple-500 italic">PlugTV</span> <br>
-            Totalmente Grátis!
+            ESPORTES, CINEMA E TV <br>
+            <span class="text-purple-500 italic text-3xl md:text-5xl">TUDO EM UM SÓ LUGAR!</span>
         </h1>
         <p class="text-gray-200 text-lg mb-10 max-w-2xl mx-auto font-medium">
-            Libere todos os canais, filmes e séries agora. <br>
-            <span class="bg-purple-800/50 px-2 py-1 rounded">Faça um teste gratuito sem compromisso</span> e comprove nossa qualidade.
+            Canais, filmes e séries sem precisar de várias assinaturas. <br>
+            <span class="bg-purple-800/50 px-2 py-1 rounded text-white font-bold italic border border-purple-400">Teste de 6 horas sem compromisso</span>
         </p>
-        <a href="https://wa.me/351930921305" target="_blank" class="inline-block bg-[#25D366] hover:bg-green-600 text-white px-12 py-5 rounded-2xl font-black text-xl shadow-2xl transition transform hover:scale-105 border-b-4 border-green-800 uppercase">
+        <a href="https://wa.me/351930921305?text=Olá! Solicitar meu teste grátis." target="_blank" class="inline-block bg-[#25D366] hover:bg-green-600 text-white px-12 py-5 rounded-2xl font-black text-xl shadow-2xl transition transform hover:scale-105 border-b-4 border-green-800 uppercase pulse-btn">
             SOLICITAR MEU TESTE GRÁTIS
         </a>
     </header>
 
+    <section class="slider-container">
+        <p class="text-center text-purple-400 font-bold mb-4 uppercase tracking-widest text-[10px]">O Melhor do Esporte e Cinema</p>
+        <div class="slider-track">
+            <div class="slide"><img src="https://logodownload.org/wp-content/uploads/2018/09/premiere-logo.png" alt="Premiere"></div>
+            <div class="slide"><img src="https://image.tmdb.org/t/p/w500/sh7e9jCvb6m7ZssmFy1pA0mUHYP.jpg" alt="Deadpool"></div>
+            <div class="slide"><img src="https://logodownload.org/wp-content/uploads/2014/05/espn-logo.png" alt="ESPN"></div>
+            <div class="slide"><img src="https://image.tmdb.org/t/p/w500/vpnVM9B6NMmQpWeZvzLv1o91noq.jpg" alt="Inside Out 2"></div>
+            <div class="slide"><img src="https://logodownload.org/wp-content/uploads/2019/08/champions-league-logo.png" alt="UCL"></div>
+            
+            <div class="slide"><img src="https://logodownload.org/wp-content/uploads/2018/09/premiere-logo.png"></div>
+            <div class="slide"><img src="https://image.tmdb.org/t/p/w500/sh7e9jCvb6m7ZssmFy1pA0mUHYP.jpg"></div>
+            <div class="slide"><img src="https://logodownload.org/wp-content/uploads/2014/05/espn-logo.png"></div>
+            <div class="slide"><img src="https://image.tmdb.org/t/p/w500/vpnVM9B6NMmQpWeZvzLv1o91noq.jpg"></div>
+            <div class="slide"><img src="https://logodownload.org/wp-content/uploads/2019/08/champions-league-logo.png"></div>
+        </div>
+    </section>
+
+    <section class="py-12 px-6 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+        <div class="p-6 bg-white/5 rounded-2xl border border-white/10">
+            <div class="text-purple-500 text-3xl mb-3">📡</div>
+            <h4 class="font-bold text-sm uppercase">Sem Antenas</h4>
+            <p class="text-gray-400 text-xs mt-1">Assista apenas com sua internet, sem cabos ou instalação.</p>
+        </div>
+        <div class="p-6 bg-white/5 rounded-2xl border border-white/10">
+            <div class="text-purple-500 text-3xl mb-3">🤝</div>
+            <h4 class="font-bold text-sm uppercase">Sem Fidelidade</h4>
+            <p class="text-gray-400 text-xs mt-1">Cancele quando quiser, sem multas ou surpresas.</p>
+        </div>
+        <div class="p-6 bg-white/5 rounded-2xl border border-white/10">
+            <div class="text-purple-500 text-3xl mb-3">📱</div>
+            <h4 class="font-bold text-sm uppercase">Assista Onde Quiser</h4>
+            <p class="text-gray-400 text-xs mt-1">Compatível com Smart TVs, celulares, tablets e PCs.</p>
+        </div>
+    </section>
+
     <section class="py-12 px-6 max-w-6xl mx-auto">
         <div class="grid md:grid-cols-3 gap-8 items-stretch text-center">
-            
-            <div class="plan-card p-8">
-                <h3 class="text-xl font-bold mb-4 uppercase text-white">Plano Mensal</h3>
-                <div class="text-4xl font-black mb-6 text-white">R$ 39,90</div>
-                <ul class="text-white space-y-4 mb-8 text-sm text-left font-semibold">
-                    <li>✅ Acesso Total Liberado</li>
-                    <li>✅ +50.000 Conteúdos</li>
-                    <li>✅ Canais 4K / UHD</li>
-                    <li>✅ Ativação Imediata</li>
-                </ul>
-                <a href="https://wa.me/351930921305" class="block bg-white/10 hover:bg-white/20 py-3 rounded-xl font-bold border border-white/20 text-white">Assinar</a>
+            <div class="plan-card p-8 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 uppercase text-purple-200">Plano Mensal</h3>
+                    <div class="text-4xl font-black mb-6">R$ 39,90</div>
+                    <ul class="text-white space-y-3 mb-8 text-sm text-left font-medium">
+                        <li>✅ Maior catálogo do Brasil</li>
+                        <li>✅ Qualidade 4K / Ultra HD</li>
+                        <li>✅ Reprodutor incluso</li>
+                        <li>✅ Ativação imediata</li>
+                        <li>✅ Suporte técnico</li>
+                    </ul>
+                </div>
+                <a href="https://wa.me/351930921305?text=Olá! Quero o Plano Mensal." class="block bg-white/10 hover:bg-white/20 py-3 rounded-xl font-bold border border-white/20 text-white transition">ASSINAR MENSAL</a>
             </div>
 
-            <div class="plan-card p-8">
-                <h3 class="text-xl font-bold mb-4 uppercase text-white">Plano Trimestral</h3>
-                <div class="text-4xl font-black mb-6 text-white">R$ 79,90</div>
-                <ul class="text-white space-y-4 mb-8 text-sm text-left font-semibold">
-                    <li>✅ Acesso Total Liberado</li>
-                    <li>✅ +50.000 Conteúdos</li>
-                    <li>✅ Canais 4K / UHD</li>
-                    <li>✅ Ativação Imediata</li>
-                </ul>
-                <a href="https://wa.me/351930921305" class="block bg-white/10 hover:bg-white/20 py-3 rounded-xl font-bold border border-white/20 text-white">Assinar</a>
+            <div class="plan-card p-8 flex flex-col justify-between border-purple-500/50">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 uppercase text-purple-200">Plano Trimestral</h3>
+                    <div class="text-4xl font-black mb-6">R$ 79,90</div>
+                    <ul class="text-white space-y-3 mb-8 text-sm text-left font-medium">
+                        <li>✅ Maior catálogo do Brasil</li>
+                        <li>✅ Qualidade 4K / Ultra HD</li>
+                        <li>✅ Reprodutor incluso</li>
+                        <li>✅ Ativação imediata</li>
+                        <li>✅ Suporte técnico</li>
+                    </ul>
+                </div>
+                <a href="https://wa.me/351930921305?text=Olá! Quero o Plano Trimestral." class="block bg-white/10 hover:bg-white/20 py-3 rounded-xl font-bold border border-white/20 text-white transition font-black">ASSINAR TRIMESTRAL</a>
             </div>
 
-            <div class="plan-card p-8 relative overflow-hidden transform md:-translate-y-6 shadow-2xl ring-4 ring-purple-500/30">
-                <div class="absolute top-0 right-0 bg-white text-purple-900 text-[10px] font-black px-4 py-2 rounded-bl-lg uppercase">Mais Popular</div>
-                <h3 class="text-xl font-bold mt-4 mb-4 uppercase text-white">Plano Anual</h3>
-                <div class="text-5xl font-black mb-6 text-white">R$ 179,90</div>
-                <ul class="text-white space-y-4 mb-8 text-sm text-left font-bold">
-                    <li>✅ Acesso Total Liberado</li>
-                    <li>✅ +50.000 Conteúdos</li>
-                    <li>✅ Canais 4K / UHD</li>
-                    <li>✅ Ativação Imediata</li>
-                </ul>
-                <a href="https://wa.me/351930921305" class="block bg-white text-purple-900 py-4 rounded-xl font-black text-lg hover:bg-gray-100 shadow-lg uppercase">Aproveitar Agora</a>
+            <div class="plan-card p-8 relative overflow-hidden transform md:-translate-y-6 shadow-2xl ring-4 ring-purple-500/30 flex flex-col justify-between bg-purple-900/60">
+                <div class="absolute top-0 right-0 bg-white text-purple-900 text-[10px] font-black px-4 py-2 rounded-bl-lg uppercase">Melhor Oferta</div>
+                <div>
+                    <h3 class="text-xl font-bold mt-4 mb-2 uppercase text-purple-100 italic">Plano Anual</h3>
+                    <p class="text-sm text-purple-300 mb-4 font-bold uppercase">Apenas <span class="text-green-400 text-lg">R$ 14,99/mês</span></p>
+                    <div class="text-5xl font-black mb-6 text-white">R$ 179,90</div>
+                    <ul class="text-white space-y-3 mb-8 text-sm text-left font-bold">
+                        <li>✅ Maior catálogo do Brasil</li>
+                        <li>✅ Qualidade 4K / Ultra HD</li>
+                        <li>✅ Reprodutor incluso</li>
+                        <li>✅ Ativação imediata</li>
+                        <li>✅ Suporte técnico</li>
+                    </ul>
+                </div>
+                <a href="https://wa.me/351930921305?text=Olá! Quero o Plano Anual promocional." class="block bg-white text-purple-900 py-4 rounded-xl font-black text-lg hover:bg-gray-100 shadow-lg uppercase transition">APROVEITAR AGORA</a>
             </div>
         </div>
     </section>
 
+    <section class="py-20 px-6 max-w-3xl mx-auto">
+        <h2 class="text-3xl font-black mb-10 text-center uppercase">Dúvidas Frequentes</h2>
+        <div class="space-y-4">
+            <div class="faq-item overflow-hidden cursor-pointer" onclick="toggleFAQ(this)">
+                <button class="w-full p-6 text-left flex justify-between items-center focus:outline-none">
+                    <span class="font-bold text-lg text-purple-200">Como recebo meus dados?</span>
+                    <span class="text-2xl text-purple-500 transition-transform duration-300">+</span>
+                </button>
+                <div class="max-h-0 overflow-hidden transition-all duration-300 px-6">
+                    <p class="pb-6 text-gray-300 text-sm">Após a confirmação no WhatsApp, enviamos o passo a passo completo e seus dados exclusivos de acesso imediatamente.</p>
+                </div>
+            </div>
+
+            <div class="faq-item overflow-hidden cursor-pointer" onclick="toggleFAQ(this)">
+                <button class="w-full p-6 text-left flex justify-between items-center focus:outline-none">
+                    <span class="font-bold text-lg text-purple-200">Em quais dispositivos posso assistir?</span>
+                    <span class="text-2xl text-purple-500 transition-transform duration-300">+</span>
+                </button>
+                <div class="max-h-0 overflow-hidden transition-all duration-300 px-6">
+                    <p class="pb-6 text-gray-300 text-sm">Nossa lista é compatível com Smart TVs, TV Box, Celulares (Android e iOS), Tablets, Computadores e Videogames.</p>
+                </div>
+            </div>
+
+            <div class="faq-item overflow-hidden cursor-pointer" onclick="toggleFAQ(this)">
+                <button class="w-full p-6 text-left flex justify-between items-center focus:outline-none">
+                    <span class="font-bold text-lg text-purple-200">O catálogo é atualizado?</span>
+                    <span class="text-2xl text-purple-500 transition-transform duration-300">+</span>
+                </button>
+                <div class="max-h-0 overflow-hidden transition-all duration-300 px-6">
+                    <p class="pb-6 text-gray-300 text-sm">Sim! Nosso catálogo de filmes e séries é atualizado semanalmente com os últimos lançamentos do cinema e das principais plataformas de streaming.</p>
+                </div>
+            </div>
+
+            <div class="faq-item overflow-hidden cursor-pointer" onclick="toggleFAQ(this)">
+                <button class="w-full p-6 text-left flex justify-between items-center focus:outline-none">
+                    <span class="font-bold text-lg text-purple-200">O sinal trava muito?</span>
+                    <span class="text-2xl text-purple-500 transition-transform duration-300">+</span>
+                </button>
+                <div class="max-h-0 overflow-hidden transition-all duration-300 px-6">
+                    <p class="pb-6 text-gray-300 text-sm">Utilizamos servidores de alta performance com tecnologia anti-travamento. Recomendamos uma internet estável para a melhor experiência em 4K.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <a href="https://wa.me/351930921305?text=Olá! Solicitar meu teste grátis." target="_blank" 
+       class="fixed bottom-6 right-6 z-50 flex items-center justify-center w-16 h-16 bg-[#25D366] rounded-full shadow-lg hover:scale-110 transition-all pulse-btn">
+        <svg class="w-9 h-9 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.438 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.938 3.659 1.434 5.633 1.435h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    </a>
+
     <footer class="text-center py-10 border-t border-white/10 text-gray-500 text-[10px] font-bold tracking-[0.3em] uppercase">
-        &copy; 2026 PlugTV Brasil - Todos os direitos reservados.
+        &copy; 2026 PlugTV | Todos os direitos reservados.
     </footer>
 
+    <script>
+        function toggleFAQ(item) {
+            const content = item.querySelector('div');
+            const icon = item.querySelector('span:last-child');
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+                icon.style.transform = 'rotate(45deg)';
+            }
+        }
+    </script>
 </body>
 </html>
